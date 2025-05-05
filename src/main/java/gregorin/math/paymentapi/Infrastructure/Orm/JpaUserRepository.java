@@ -1,4 +1,4 @@
-package gregorin.math.paymentapi.Infrastructure.Selector;
+package gregorin.math.paymentapi.Infrastructure.Orm;
 
 import gregorin.math.paymentapi.Infrastructure.Models.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;

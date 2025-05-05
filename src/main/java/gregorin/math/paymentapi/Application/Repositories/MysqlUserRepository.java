@@ -4,7 +4,7 @@ import gregorin.math.paymentapi.Application.Mapping.UserMapping;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Domain.Repositories.UserRepositoryInterface;
 import gregorin.math.paymentapi.Infrastructure.Models.UserModel;
-import gregorin.math.paymentapi.Infrastructure.Selector.JpaUserRepository;
+import gregorin.math.paymentapi.Infrastructure.Orm.JpaUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
@@ -20,7 +20,12 @@ public class MysqlUserRepository implements UserRepositoryInterface {
 
     @Override
     public Optional<UserEntity> findByName(String name) {
-        UserModel user = this.jpaUserRepository.findByName(name);
-        return Optional.of(UserMapping.mapToEntity(user));
+        try {
+            UserModel user = this.jpaUserRepository.findByName(name);
+            return Optional.of(UserMapping.mapToEntity(user));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
