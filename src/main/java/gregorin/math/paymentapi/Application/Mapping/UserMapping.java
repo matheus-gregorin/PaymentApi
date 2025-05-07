@@ -6,6 +6,9 @@ import gregorin.math.paymentapi.Infrastructure.Models.UserModel;
 public class UserMapping {
 
     public static UserEntity mapToEntity (UserModel userModel){
+        if(userModel == null){
+            throw new RuntimeException("User not found in the database");
+        }
         return new UserEntity(
             userModel.getUuid(),
                 userModel.getName(),
