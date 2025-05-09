@@ -13,4 +13,10 @@ public class DbConfiguration {
     {
         return new MysqlUserRepository();
     }
+
+    @Bean(name = "teste")
+    public String teste()
+    {
+        return null;
+    }
 }

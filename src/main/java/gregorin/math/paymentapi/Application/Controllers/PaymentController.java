@@ -1,5 +1,6 @@
 package gregorin.math.paymentapi.Application.Controllers;
 
+import gregorin.math.paymentapi.Application.Responses.ApiResponse;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Domain.Repositories.UserRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+
+import java.util.*;
 
 @RestController
 @RequestMapping("payments")
 public class PaymentController {
 
-    @Autowired
-    @Qualifier("mysql")
+//    @Autowired
+//    @Qualifier("mysql")
     private final UserRepositoryInterface userRepository;
 
     public PaymentController(UserRepositoryInterface userRepository) {
@@ -32,16 +32,14 @@ public class PaymentController {
         try{
             Optional<UserEntity> user = this.userRepository.findByName(name);
             if(user.isPresent()){
-                return ResponseEntity.ok(user);
+                return ApiResponse.success("User found", user);
             }
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            return ResponseEntity.notFound().build();
         } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("success", "false");
-            error.put("error", "User not found");
-            System.out.println("Log do erro: ");
             System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(error);
+            List<String> errors = new ArrayList<>();
+            errors.add("User not found");
+            return ApiResponse.error("User not found", errors);
         }
     }
 }
