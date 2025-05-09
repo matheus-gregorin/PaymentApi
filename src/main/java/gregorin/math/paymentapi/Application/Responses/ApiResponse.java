@@ -30,10 +30,10 @@ public class ApiResponse<T> {
 
     // Métodos auxiliares estáticos
     public static <T> ResponseEntity<ApiResponse<T>> success(String message, T data) {
-        return ResponseEntity.ok(new ApiResponse<>("success", message, data));
+        return ResponseEntity.status(200).body(new ApiResponse<>("success", message, data));
     }
 
-    public static <T> ResponseEntity<ApiResponse<T>> error(String message, T data) {
-        return ResponseEntity.badRequest().body(new ApiResponse<>("error", message, data));
+    public static <T> ResponseEntity<ApiResponse<T>> error(String message, Integer status, T data) {
+        return ResponseEntity.status(status).body(new ApiResponse<>("error", message, data));
     }
 }

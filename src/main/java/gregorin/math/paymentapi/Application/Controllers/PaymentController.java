@@ -1,11 +1,9 @@
 package gregorin.math.paymentapi.Application.Controllers;
 
+import gregorin.math.paymentapi.Application.Exceptions.UserNotFoundException;
 import gregorin.math.paymentapi.Application.Responses.ApiResponse;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Domain.Repositories.UserRepositoryInterface;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,19 +25,21 @@ public class PaymentController {
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<?> getUser(@PathVariable String name)
-    {
+    public ResponseEntity<?> getUser(@PathVariable String name) {
         try{
-            Optional<UserEntity> user = this.userRepository.findByName(name);
-            if(user.isPresent()){
-                return ApiResponse.success("User found", user);
-            }
-            return ResponseEntity.notFound().build();
+            UserEntity user = this.userRepository.findByName(name);
+            return ApiResponse.success("User found", user);
+
+        } catch (UserNotFoundException e) {
+            System.out.println("USER NOT FOUND: " + e.getMessage());
+            return ResponseEntity.noContent().build();
+
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("EXCEPTION: " + e.getMessage());
             List<String> errors = new ArrayList<>();
-            errors.add("User not found");
-            return ApiResponse.error("User not found", errors);
+            errors.add("Server error");
+            return ApiResponse.error("User not found", 500, errors);
+
         }
     }
 }

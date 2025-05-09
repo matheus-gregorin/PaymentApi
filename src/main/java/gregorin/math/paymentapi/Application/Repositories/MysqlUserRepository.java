@@ -1,5 +1,6 @@
 package gregorin.math.paymentapi.Application.Repositories;
 
+import gregorin.math.paymentapi.Application.Exceptions.UserNotFoundException;
 import gregorin.math.paymentapi.Application.Mapping.UserMapping;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Domain.Repositories.UserRepositoryInterface;
@@ -19,13 +20,12 @@ public class MysqlUserRepository implements UserRepositoryInterface {
     private JpaUserRepository jpaUserRepository;
 
     @Override
-    public Optional<UserEntity> findByName(String name) {
-        try {
-            UserModel user = this.jpaUserRepository.findByName(name);
-            return Optional.of(UserMapping.mapToEntity(user));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
+    public UserEntity findByName(String name) {
+        UserModel user = this.jpaUserRepository
+                .findByName(name)
+                .orElseThrow(
+                        () -> new UserNotFoundException("User not found in database")
+                );
+        return UserMapping.mapToEntity(user);
     }
 }
