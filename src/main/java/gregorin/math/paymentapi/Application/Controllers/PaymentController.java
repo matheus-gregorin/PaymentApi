@@ -3,6 +3,7 @@ package gregorin.math.paymentapi.Application.Controllers;
 import gregorin.math.paymentapi.Application.Exceptions.UserNotFoundException;
 import gregorin.math.paymentapi.Application.Mapping.UserMapping;
 import gregorin.math.paymentapi.Application.Responses.ApiResponse;
+import gregorin.math.paymentapi.Application.UseCases.GetUserUseCase;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Domain.Repositories.UserRepositoryInterface;
 import org.springframework.http.ResponseEntity;
@@ -17,18 +18,16 @@ import java.util.*;
 @RequestMapping("payments")
 public class PaymentController {
 
-//    @Autowired
-//    @Qualifier("mysql")
-    private final UserRepositoryInterface userRepository;
+    private final GetUserUseCase getUserUseCase;
 
-    public PaymentController(UserRepositoryInterface userRepository) {
-        this.userRepository = userRepository;
+    public PaymentController(GetUserUseCase getUserUseCase) {
+        this.getUserUseCase = getUserUseCase;
     }
 
     @GetMapping("/{name}")
     public ResponseEntity<?> getUser(@PathVariable String name) {
         try{
-            UserEntity user = this.userRepository.findByName(name);
+            UserEntity user = this.getUserUseCase.getByName(name);
             return ApiResponse.success("User found", UserMapping.mapToDto(user));
 
         } catch (UserNotFoundException e) {
