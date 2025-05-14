@@ -2,9 +2,8 @@ package gregorin.math.paymentapi.Application.Responses;
 
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
-
 public class ApiResponse<T> {
+
     private String status;
     private String message;
     private T data;
@@ -15,7 +14,6 @@ public class ApiResponse<T> {
         this.data = data;
     }
 
-    // Getters
     public String getStatus() {
         return status;
     }
@@ -34,6 +32,6 @@ public class ApiResponse<T> {
     }
 
     public static <T> ResponseEntity<ApiResponse<T>> error(String message, Integer status, T data) {
-        return ResponseEntity.status(status).body(new ApiResponse<>("error", message, data));
+        return ResponseEntity.status(status).body(new ApiResponse<>("failed", message, data));
     }
 }
