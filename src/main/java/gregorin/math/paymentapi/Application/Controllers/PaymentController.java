@@ -1,6 +1,7 @@
 package gregorin.math.paymentapi.Application.Controllers;
 
 import gregorin.math.paymentapi.Application.Exceptions.UserNotFoundException;
+import gregorin.math.paymentapi.Application.Mapping.UserMapping;
 import gregorin.math.paymentapi.Application.Responses.ApiResponse;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Domain.Repositories.UserRepositoryInterface;
@@ -28,7 +29,7 @@ public class PaymentController {
     public ResponseEntity<?> getUser(@PathVariable String name) {
         try{
             UserEntity user = this.userRepository.findByName(name);
-            return ApiResponse.success("User found", user);
+            return ApiResponse.success("User found", UserMapping.mapToDto(user));
 
         } catch (UserNotFoundException e) {
             System.out.println("USER NOT FOUND: " + e.getMessage());
