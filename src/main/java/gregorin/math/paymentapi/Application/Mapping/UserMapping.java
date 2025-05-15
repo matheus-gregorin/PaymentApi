@@ -1,11 +1,11 @@
 package gregorin.math.paymentapi.Application.Mapping;
 
-import gregorin.math.paymentapi.Domain.Dtos.UserResponseDto;
+import gregorin.math.paymentapi.Domain.Dtos.Responses.GetUserResponseDto;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Infrastructure.Models.UserModel;
 
 public class UserMapping {
-    public static UserEntity mapToEntity (UserModel userModel)
+    public static UserEntity mapModelToEntity (UserModel userModel)
     {
         return new UserEntity(
             userModel.getUuid(),
@@ -17,14 +17,14 @@ public class UserMapping {
         );
     }
 
-    public static UserResponseDto mapToDto (UserEntity user)
+    public static GetUserResponseDto mapEntityToResponseDto (UserEntity user)
     {
-        return new UserResponseDto(
+        return new GetUserResponseDto(
                 user.getUuid(),
-                user.getName(),
-                user.getEmail(),
-                user.getCreated_at(),
-                user.getUpdated_at()
+                    user.getName(),
+                        user.getEmail(),
+                            user.getCreated_at(),
+                                user.getUpdated_at()
         );
     }
 
