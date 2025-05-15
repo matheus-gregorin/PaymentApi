@@ -26,6 +26,6 @@ public class MysqlUserRepository implements UserRepositoryInterface {
                 .orElseThrow(
                         () -> new UserNotFoundException("User not found in database")
                 );
-        return UserMapping.mapToEntity(user);
+        return UserMapping.mapModelToEntity(user);
     }
 }
