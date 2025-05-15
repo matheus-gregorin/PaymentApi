@@ -1,8 +1,8 @@
-package gregorin.math.paymentapi.Domain.Dtos;
+package gregorin.math.paymentapi.Domain.Dtos.Responses;
 
 import java.time.LocalDateTime;
 
-public class UserResponseDto {
+public class GetUserResponseDto {
 
     private String uuid;
     private String name;
@@ -10,7 +10,7 @@ public class UserResponseDto {
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
-    public UserResponseDto(
+    public GetUserResponseDto(
             String uuid,
             String name,
             String email,
