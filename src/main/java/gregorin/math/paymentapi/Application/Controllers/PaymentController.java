@@ -5,12 +5,8 @@ import gregorin.math.paymentapi.Application.Mapping.UserMapping;
 import gregorin.math.paymentapi.Application.Responses.ApiResponse;
 import gregorin.math.paymentapi.Application.UseCases.GetUserUseCase;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
-import gregorin.math.paymentapi.Domain.Repositories.UserRepositoryInterface;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -24,11 +20,16 @@ public class PaymentController {
         this.getUserUseCase = getUserUseCase;
     }
 
-    @GetMapping("/{name}")
+    @PostMapping("/create-user")
+    public void createUser() {
+        System.out.println();
+    }
+
+    @GetMapping("/get-user/{name}")
     public ResponseEntity<?> getUser(@PathVariable String name) {
         try{
             UserEntity user = this.getUserUseCase.getByName(name);
-            return ApiResponse.success("User found", UserMapping.mapToDto(user));
+            return ApiResponse.success("User found", UserMapping.mapEntityToResponseDto(user));
 
         } catch (UserNotFoundException e) {
             System.out.println("USER NOT FOUND: " + e.getMessage());
