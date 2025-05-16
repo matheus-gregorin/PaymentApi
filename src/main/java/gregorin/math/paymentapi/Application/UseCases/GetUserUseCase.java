@@ -1,10 +1,12 @@
 package gregorin.math.paymentapi.Application.UseCases;
 
+import gregorin.math.paymentapi.Application.Exceptions.UserRequestNotHasNameException;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Domain.Repositories.UserRepositoryInterface;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class GetUserUseCase {
 
     // @Autowired
@@ -16,6 +18,9 @@ public class GetUserUseCase {
     }
 
     public UserEntity getByName (String name) {
+        if(name.isEmpty()) {
+            throw new UserRequestNotHasNameException("Name parameter is null");
+        }
         return this.userRepository.findByName(name);
     }
 }
