@@ -2,6 +2,8 @@ package gregorin.math.paymentapi.Infrastructure.Models;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -25,6 +27,9 @@ public class UserModel {
 
     @Column(nullable = false)
     private LocalDateTime updated_at;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PaymentModel> payments = new ArrayList<>();
 
     // Getters e Setters
     public String getUuid() {
@@ -69,5 +74,13 @@ public class UserModel {
 
     public void setUpdated_at(LocalDateTime updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public List<PaymentModel> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<PaymentModel> payments) {
+        this.payments = payments;
     }
 }
