@@ -31,9 +31,9 @@ public class MysqlUserRepository implements UserRepositoryInterface {
     }
 
     @Override
-    public UserEntity findByName(String name) {
+    public UserEntity findByEmail(String email) {
         UserModel user = this.jpaUserRepository
-                .findByName(name)
+                .findByEmail(email)
                 .orElseThrow(
                         () -> new UserNotFoundException("User not found in database")
                 );

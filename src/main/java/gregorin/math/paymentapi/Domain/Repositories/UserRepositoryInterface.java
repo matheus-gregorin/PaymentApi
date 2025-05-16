@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface UserRepositoryInterface {
     UserEntity createUser (UserModel user);
-    UserEntity findByName (String name);
+    UserEntity findByEmail (String email);
 }
