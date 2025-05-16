@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface JpaUserRepository extends JpaRepository<UserModel, String> {
-    @Query("SELECT u FROM UserModel u WHERE u.name = :name")
-    Optional<UserModel> findByName(@Param("name") String name);
+    Optional<UserModel> findByEmail(String email);
+    Optional<UserModel> findByName(String name);
 }

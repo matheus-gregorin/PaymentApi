@@ -32,16 +32,29 @@ public class UserMapping {
         );
     }
 
-    public static UserEntity mapGenericToEntity (CreateUserRequestDto request)
+    public static UserEntity mapCreateUserDtoToEntity (CreateUserRequestDto request)
     {
         return new UserEntity(
-                UUID.randomUUID().toString().replace("-", ""),
+                UUID.randomUUID().toString(),
                     request.getName(),
                         request.getEmail(),
                             request.getPassword(),
                                 LocalDateTime.now(),
                                     LocalDateTime.now()
         );
+    }
+
+    public static UserModel mapUserEntityToModel (UserEntity user)
+    {
+        UserModel userModel = new UserModel();
+            userModel.setUuid(user.getUuid());
+                userModel.setName(user.getName());
+                    userModel.setEmail(user.getEmail());
+                        userModel.setPassword(user.getPassword());
+                            userModel.setCreated_at(user.getCreated_at());
+                                userModel.setUpdated_at(user.getUpdated_at());
+
+                                return userModel;
     }
 
 }

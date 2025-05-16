@@ -8,8 +8,7 @@ import java.time.LocalDateTime;
 public class UserModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "uuid")
+    @Column(name = "uuid", nullable = false, updatable = false, unique = true)
     private String uuid;
 
     @Column(nullable = false)

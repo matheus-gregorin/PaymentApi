@@ -1,5 +1,6 @@
 package gregorin.math.paymentapi.Application.Repositories;
 
+import gregorin.math.paymentapi.Application.Exceptions.UserEmailExistsException;
 import gregorin.math.paymentapi.Application.Exceptions.UserNotFoundException;
 import gregorin.math.paymentapi.Application.Mapping.UserMapping;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
@@ -20,6 +21,16 @@ public class MysqlUserRepository implements UserRepositoryInterface {
     private JpaUserRepository jpaUserRepository;
 
     @Override
+    public UserEntity createUser(UserModel user) {
+        Boolean userSearch = this.validUserExists(user.getEmail());
+        if(userSearch){
+            throw new UserEmailExistsException("E-mail already in use");
+        }
+        UserModel userSave = this.jpaUserRepository.save(user);
+        return UserMapping.mapModelToEntity(userSave);
+    }
+
+    @Override
     public UserEntity findByName(String name) {
         UserModel user = this.jpaUserRepository
                 .findByName(name)
@@ -27,5 +38,10 @@ public class MysqlUserRepository implements UserRepositoryInterface {
                         () -> new UserNotFoundException("User not found in database")
                 );
         return UserMapping.mapModelToEntity(user);
+    }
+
+    public Boolean validUserExists(String email) {
+        Optional<UserModel> user = this.jpaUserRepository.findByEmail(email);
+        return user.isPresent();
     }
 }
