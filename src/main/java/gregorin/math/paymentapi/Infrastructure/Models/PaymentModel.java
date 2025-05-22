@@ -47,11 +47,11 @@ public class PaymentModel {
         this.user = user;
     }
 
-    public Float getValue_payment() {
+    public Float getValuePayment() {
         return value_payment;
     }
 
-    public void setValue_payment(Float value_payment) {
+    public void setValuePayment(Float value_payment) {
         this.value_payment = value_payment;
     }
 
@@ -71,19 +71,19 @@ public class PaymentModel {
         this.maturity = maturity;
     }
 
-    public LocalDateTime getCreated_at() {
+    public LocalDateTime getCreatedAt() {
         return created_at;
     }
 
-    public void setCreated_at(LocalDateTime created_at) {
+    public void setCreatedAt(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
-    public LocalDateTime getUpdated_at() {
+    public LocalDateTime getUpdatedAt() {
         return updated_at;
     }
 
-    public void setUpdated_at(LocalDateTime updated_at) {
+    public void setUpdatedAt(LocalDateTime updated_at) {
         this.updated_at = updated_at;
     }
 }
