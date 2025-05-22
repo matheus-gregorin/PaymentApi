@@ -6,17 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DbConfiguration {
+public class DbUserConfiguration {
 
-    @Bean(name = "mysql")
-    public UserRepositoryInterface mysql()
+    @Bean(name = "mysqlUser")
+    public UserRepositoryInterface mysqlUser()
     {
         return new MysqlUserRepository();
-    }
-
-    @Bean(name = "teste")
-    public String teste()
-    {
-        return null;
     }
 }

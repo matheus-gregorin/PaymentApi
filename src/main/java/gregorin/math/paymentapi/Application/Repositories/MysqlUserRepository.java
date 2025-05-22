@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-@Profile("mysql")
+@Profile("mysqlUser")
 public class MysqlUserRepository implements UserRepositoryInterface {
 
     @Autowired
