@@ -1,6 +1,6 @@
 package gregorin.math.paymentapi.Application.Repositories;
 
-import gregorin.math.paymentapi.Application.Exceptions.PaymentsNotFoundException;
+import gregorin.math.paymentapi.Application.Exceptions.Payments.PaymentsNotFoundException;
 import gregorin.math.paymentapi.Application.Mapping.PaymentMapping;
 import gregorin.math.paymentapi.Domain.Entities.PaymentEntity;
 import gregorin.math.paymentapi.Domain.Repositories.PaymentRepositoryInterface;

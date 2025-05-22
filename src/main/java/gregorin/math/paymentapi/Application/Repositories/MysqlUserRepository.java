@@ -1,7 +1,7 @@
 package gregorin.math.paymentapi.Application.Repositories;
 
-import gregorin.math.paymentapi.Application.Exceptions.UserEmailExistsException;
-import gregorin.math.paymentapi.Application.Exceptions.UserNotFoundException;
+import gregorin.math.paymentapi.Application.Exceptions.Users.UserEmailExistsException;
+import gregorin.math.paymentapi.Application.Exceptions.Users.UserNotFoundException;
 import gregorin.math.paymentapi.Application.Mapping.UserMapping;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Domain.Repositories.UserRepositoryInterface;

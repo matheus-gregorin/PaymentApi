@@ -1,9 +1,8 @@
 package gregorin.math.paymentapi.Application.Mapping;
 
+import gregorin.math.paymentapi.Domain.Dtos.Responses.Payments.GetPaymentResponseDto;
 import gregorin.math.paymentapi.Domain.Entities.PaymentEntity;
-import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Infrastructure.Models.PaymentModel;
-import gregorin.math.paymentapi.Infrastructure.Models.UserModel;
 
 public class PaymentMapping {
     public static PaymentEntity mapModelToEntity (PaymentModel paymentModel)
@@ -16,6 +15,19 @@ public class PaymentMapping {
                 paymentModel.getMaturity(),
                 paymentModel.getCreatedAt(),
                 paymentModel.getUpdatedAt()
+        );
+    }
+
+    public static GetPaymentResponseDto mapEntityToResponseDto (PaymentEntity payment)
+    {
+        return new GetPaymentResponseDto(
+                payment.getUuid(),
+                UserMapping.mapEntityToResponseDto(payment.getUser()),
+                payment.getValuePayment(),
+                payment.getPaid(),
+                payment.getMaturity(),
+                payment.getCreatedAt(),
+                payment.getUpdatedAt()
         );
     }
 }

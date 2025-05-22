@@ -1,4 +1,4 @@
-package gregorin.math.paymentapi.Domain.Dtos.Requests;
+package gregorin.math.paymentapi.Domain.Dtos.Requests.Users;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

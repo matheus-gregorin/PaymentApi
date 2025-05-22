@@ -1,4 +1,4 @@
-package gregorin.math.paymentapi.Domain.Dtos.Responses;
+package gregorin.math.paymentapi.Domain.Dtos.Responses.Users;
 
 import java.time.LocalDateTime;
 

@@ -1,7 +1,7 @@
 package gregorin.math.paymentapi.Application.Mapping;
 
-import gregorin.math.paymentapi.Domain.Dtos.Requests.CreateUserRequestDto;
-import gregorin.math.paymentapi.Domain.Dtos.Responses.GetUserResponseDto;
+import gregorin.math.paymentapi.Domain.Dtos.Requests.Users.CreateUserRequestDto;
+import gregorin.math.paymentapi.Domain.Dtos.Responses.Users.GetUserResponseDto;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Infrastructure.Models.UserModel;
 

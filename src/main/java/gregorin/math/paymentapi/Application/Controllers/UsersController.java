@@ -1,13 +1,13 @@
 package gregorin.math.paymentapi.Application.Controllers;
 
-import gregorin.math.paymentapi.Application.Exceptions.UserEmailExistsException;
-import gregorin.math.paymentapi.Application.Exceptions.UserNotFoundException;
-import gregorin.math.paymentapi.Application.Exceptions.UserRequestNotHasEmailException;
+import gregorin.math.paymentapi.Application.Exceptions.Users.UserEmailExistsException;
+import gregorin.math.paymentapi.Application.Exceptions.Users.UserNotFoundException;
+import gregorin.math.paymentapi.Application.Exceptions.Users.UserRequestNotHasEmailException;
 import gregorin.math.paymentapi.Application.Mapping.UserMapping;
 import gregorin.math.paymentapi.Application.Responses.ApiResponse;
-import gregorin.math.paymentapi.Application.UseCases.CreateUserUseCase;
-import gregorin.math.paymentapi.Application.UseCases.GetUserUseCase;
-import gregorin.math.paymentapi.Domain.Dtos.Requests.CreateUserRequestDto;
+import gregorin.math.paymentapi.Application.UseCases.Users.CreateUserUseCase;
+import gregorin.math.paymentapi.Application.UseCases.Users.GetUserUseCase;
+import gregorin.math.paymentapi.Domain.Dtos.Requests.Users.CreateUserRequestDto;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
