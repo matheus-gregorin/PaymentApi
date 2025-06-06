@@ -2,9 +2,11 @@ package gregorin.math.paymentapi.Application.Repositories;
 
 import gregorin.math.paymentapi.Application.Exceptions.Payments.PaymentsNotFoundException;
 import gregorin.math.paymentapi.Application.Mapping.PaymentMapping;
+import gregorin.math.paymentapi.Application.Mapping.UserMapping;
 import gregorin.math.paymentapi.Domain.Entities.PaymentEntity;
 import gregorin.math.paymentapi.Domain.Repositories.PaymentRepositoryInterface;
 import gregorin.math.paymentapi.Infrastructure.Models.PaymentModel;
+import gregorin.math.paymentapi.Infrastructure.Models.UserModel;
 import gregorin.math.paymentapi.Infrastructure.Orm.JpaPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -31,5 +33,11 @@ public class MysqlPaymentRepository implements PaymentRepositoryInterface {
             paymentList.add(PaymentMapping.mapModelToEntity(payment));
         }
         return paymentList;
+    }
+
+    @Override
+    public PaymentEntity create(PaymentModel payment) {
+        PaymentModel paymentModel = this.jpaPaymentRepository.save(payment);
+        return PaymentMapping.mapModelToEntity(paymentModel);
     }
 }

@@ -5,6 +5,7 @@ import gregorin.math.paymentapi.Domain.Dtos.Responses.Payments.GetPaymentRespons
 import gregorin.math.paymentapi.Domain.Entities.PaymentEntity;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Infrastructure.Models.PaymentModel;
+import gregorin.math.paymentapi.Infrastructure.Models.UserModel;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -51,5 +52,19 @@ public class PaymentMapping {
                                 LocalDateTime.now(),
                                     LocalDateTime.now()
         );
+    }
+
+    public static PaymentModel mapUserEntityToModel (PaymentEntity payment)
+    {
+        PaymentModel paymentModel = new PaymentModel();
+        paymentModel.setUuid(payment.getUuid());
+        paymentModel.setUser(UserMapping.mapUserEntityToModel(payment.getUser()));
+        paymentModel.setValuePayment(payment.getValuePayment());
+        paymentModel.setPaid(payment.getPaid());
+        paymentModel.setMaturity(payment.getMaturity());
+        paymentModel.setCreatedAt(payment.getCreatedAt());
+        paymentModel.setUpdatedAt(payment.getUpdatedAt());
+
+        return paymentModel;
     }
 }

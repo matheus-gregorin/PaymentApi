@@ -1,5 +1,6 @@
 package gregorin.math.paymentapi.Application.UseCases.Payments;
 
+import gregorin.math.paymentapi.Application.Mapping.PaymentMapping;
 import gregorin.math.paymentapi.Domain.Entities.PaymentEntity;
 import gregorin.math.paymentapi.Domain.Entities.UserEntity;
 import gregorin.math.paymentapi.Domain.Repositories.PaymentRepositoryInterface;
@@ -10,22 +11,26 @@ import org.springframework.stereotype.Component;
 public class CreatePaymentsUseCase {
 
 
-    private PaymentRepositoryInterface paymentRepository;
+    private PaymentRepositoryInterface paymentRepositoryInterface;
     private UserRepositoryInterface userRepositoryInterface;
 
     public CreatePaymentsUseCase(
-            PaymentRepositoryInterface paymentRepository,
+            PaymentRepositoryInterface paymentRepositoryInterface,
             UserRepositoryInterface userRepositoryInterface
     )
     {
-        this.paymentRepository = paymentRepository;
+        this.paymentRepositoryInterface = paymentRepositoryInterface;
         this.userRepositoryInterface = userRepositoryInterface;
     }
 
     public PaymentEntity create(PaymentEntity payment, String userUuid)
     {
+        // Se o usuário não for encontrado
+        // Vai disparar uma exception (UserNotFoundException)
+        // Onde a controller está preparada para captura-la e tratar a resposta
         UserEntity user = this.userRepositoryInterface.findByUuid(userUuid);
-        System.out.println(user.getName());
-        return null;
+        payment.setUser(user);
+
+        return this.paymentRepositoryInterface.create(PaymentMapping.mapUserEntityToModel(payment));
     }
 }
