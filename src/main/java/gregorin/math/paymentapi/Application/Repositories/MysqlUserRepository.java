@@ -40,6 +40,16 @@ public class MysqlUserRepository implements UserRepositoryInterface {
         return UserMapping.mapModelToEntity(user);
     }
 
+    @Override
+    public UserEntity findByUuid(String uuid) {
+        UserModel user = this.jpaUserRepository
+                .findByUuid(uuid)
+                .orElseThrow(
+                        () -> new UserNotFoundException("User not found in database")
+                );
+        return UserMapping.mapModelToEntity(user);
+    }
+
     public Boolean validUserExists(String email) {
         Optional<UserModel> user = this.jpaUserRepository.findByEmail(email);
         return user.isPresent();

@@ -15,7 +15,7 @@ public class CreatePaymentRequestDto {
 
     @Positive(message = "Payment values can not is negative or zero")
     @NotNull(message = "Payment value is mandatory")
-    private Double payment_value;
+    private Float payment_value;
 
     @NotNull(message = "Paid is mandatory")
     private Boolean paid;
@@ -31,11 +31,11 @@ public class CreatePaymentRequestDto {
         this.user_uuid = user_uuid;
     }
 
-    public Double getPayment_value() {
+    public Float getPayment_value() {
         return payment_value;
     }
 
-    public void setPayment_value(Double payment_value) {
+    public void setPayment_value(Float payment_value) {
         this.payment_value = payment_value;
     }
 

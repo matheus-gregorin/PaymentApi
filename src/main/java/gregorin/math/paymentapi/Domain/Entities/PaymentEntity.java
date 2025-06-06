@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class PaymentEntity {
 
         private String uuid;
-        private UserEntity user;
+        private UserEntity user = null;
         private Float value_payment;
         private Boolean paid;
         private LocalDateTime maturity;
@@ -16,7 +16,6 @@ public class PaymentEntity {
 
     public PaymentEntity(
             String uuid,
-            UserEntity user,
             Float value_payment,
             Boolean paid,
             LocalDateTime maturity,
@@ -24,7 +23,6 @@ public class PaymentEntity {
             LocalDateTime updated_at
     ) {
         this.uuid = uuid;
-        this.user = user;
         this.value_payment = value_payment;
         this.paid = paid;
         this.maturity = maturity;
