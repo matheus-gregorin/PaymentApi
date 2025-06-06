@@ -24,7 +24,6 @@ public class PaymentController {
     @PostMapping("/create")
     public ResponseEntity<?> createPayment(@RequestBody @Valid CreatePaymentRequestDto request) {
         try {
-            System.out.println(request.getMaturity());
             return ApiResponse.success("Payments create", new ArrayList<>());
 
         } catch (Exception e) {

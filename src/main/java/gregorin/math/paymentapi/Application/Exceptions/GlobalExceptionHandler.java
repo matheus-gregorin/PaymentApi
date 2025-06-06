@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
             MismatchedInputException mie = (MismatchedInputException) ex.getCause();
             if (mie.getPath() != null && !mie.getPath().isEmpty()) {
                 String fieldName = mie.getPath().get(mie.getPath().size() - 1).getFieldName();
-                customErrorMessage = String.format("Campo '%s' com formato ou tipo de dado inválido.", fieldName);
+                customErrorMessage = String.format("Field '%s' has invalid format or data type.", fieldName);
                 details.add(mie.getOriginalMessage());
             } else {
                 details.add(mie.getOriginalMessage());
@@ -51,7 +51,7 @@ public class GlobalExceptionHandler {
             // Se for um erro de data/hora especificamente
             if (mie.getCause() instanceof DateTimeParseException) {
                 DateTimeParseException dtpe = (DateTimeParseException) mie.getCause();
-                customErrorMessage = String.format("Formato de data e hora inválido para o campo '%s'.", mie.getPath().get(mie.getPath().size() - 1).getFieldName());
+                customErrorMessage = String.format("Invalid date and time format for field '%s'.", mie.getPath().get(mie.getPath().size() - 1).getFieldName());
                 details.add("Formato esperado: YYYY-MM-DDTHH:MM:SS ou similar. Erro original: " + dtpe.getMessage());
             }
 
@@ -62,7 +62,11 @@ public class GlobalExceptionHandler {
         // Opcional: Logar a exceção completa para depuração no servidor, mas não enviar ao cliente
         ex.printStackTrace();
 
-        return ApiResponse.error(customErrorMessage, HttpStatus.BAD_REQUEST.value(), details);
+        System.out.println(details);
+
+        List<String> response = new ArrayList<>();
+        response.add(customErrorMessage);
+        return ApiResponse.error("Validation failed", HttpStatus.BAD_REQUEST.value(), response);
     }
 
     @ExceptionHandler(Exception.class)
